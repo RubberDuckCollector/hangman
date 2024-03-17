@@ -5,6 +5,7 @@ from getpass import getpass
 
 
 # TODO: make a list of correct guesses. if P2 guesses an already correct letter, the program shouts at them
+# DISCLAIMER: i know i can refactor `letter_and_indices_to_replace` to be only one dimensional and have P2's guess be a single char, but it works this way so i'm keeping it. i know it's more confusing this way
 
 def clear_screen():
     if sys.platform == "Windows":
