@@ -28,13 +28,13 @@ def game():
     incorrect_letters = []
     correct_letters = []
 
-    player_2_guess = ""
+    player_2_guess = ""  # initialising this just in case we need it for processing spaces
 
     print("The program only accepts the first character of Player 2's input.")
     print("The program will only work with lowercase letters.")
 
     if "/" in player_1_word:
-        player_2_guess = "/"
+        player_2_guess = "/"  # looks like we need it, emulate a correct guess of " " by P2 to remove the need to guess a space
         correct_letters.append(player_2_guess[0])
         letter_and_indices_to_replace = [["/"], []]
         for i in range(len(player_1_word)):
@@ -53,7 +53,6 @@ def game():
         letter_and_indices_to_replace = [[], []]
     else:
         pass
-
 
     while True:
         try:
