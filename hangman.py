@@ -4,8 +4,8 @@ import readline
 from getpass import getpass
 
 
-# TODO: turn spaces into /
 # DISCLAIMER: i know i can refactor `letter_and_indices_to_replace` to be only one dimensional and have P2's guess be a single char, but it works this way so i'm keeping it. i know it's more confusing this way
+
 
 def clear_screen():
     if sys.platform == "Windows":
@@ -38,7 +38,7 @@ def game():
         correct_letters.append(player_2_guess[0])
         letter_and_indices_to_replace = [["/"], []]
         for i in range(len(player_1_word)):
-            if player_2_guess[0] == player_1_word[i]:  # by iterating over P1's word, we get each index of P2's correct guess
+            if player_2_guess[0] == player_1_word[i]:  # by iterating over P1's word, we get each index of P2's correct guess in P1's word
                 letter_and_indices_to_replace[1].append(i)  # put the index of every occurrence of the P2's char in the second sub-list
 
         # replace characters in player_1_stars
