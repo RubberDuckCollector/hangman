@@ -4,8 +4,11 @@ import readline
 from getpass import getpass
 
 
-# DISCLAIMER: i know i can refactor `letter_and_indices_to_replace` to be only one dimensional and have P2's guess be a single char, but it works this way so i'm keeping it. i know it's more confusing this way
-
+"""
+DISCLAIMER: i know i can refactor `letter_and_indices_to_replace` to be only one dimensional
+and have P2's guess be a single char, but it works this way so i'm keeping it.
+i know it's more confusing this way
+"""
 
 def clear_screen():
     if sys.platform == "Windows":
@@ -28,13 +31,13 @@ def game():
     incorrect_letters = []
     correct_letters = []
 
-    player_2_guess = ""  # initialising this just in case we need it for processing spaces
+    player_2_guess = ""  # initialising this for processing spaces before the guessing starts
 
     print("The program only accepts the first character of Player 2's input.")
     print("The program will only work with lowercase letters.")
 
     if "/" in player_1_word:
-        player_2_guess = "/"  # looks like we need it, emulate a correct guess of " " by P2 to remove the need to guess a space
+        player_2_guess = "/"  # emulate a correct guess of " " by P2 to remove the need to guess a space
         correct_letters.append(player_2_guess[0])
         letter_and_indices_to_replace = [["/"], []]
         for i in range(len(player_1_word)):
@@ -44,13 +47,17 @@ def game():
         # replace characters in player_1_stars
         while len(letter_and_indices_to_replace[1]) != 0:
 
-            # the letter at the index (controlled by the first element of the second sublist) is reassigned the value of P2's guess
+            # the letter at the index (controlled by the first element of the second sublist)
+            # is reassigned the value of P2's guess
+            # so here, each instance of a space in P1's phrase is replaced by a / as seen on line 42
+            # because we've specifically looked for every space in P1's phrase
             player_1_word_stars[letter_and_indices_to_replace[1][0]] = letter_and_indices_to_replace[0][0]
 
-            # this index is then removed from the list to not be processed again. we don't need it
+            # this index is then removed from the list to not be processed again. to avoid repeated actions
             letter_and_indices_to_replace[1].pop(0)
-        print(*player_1_word_stars)
+        # the pre-processing before the guess takes place has finished
         letter_and_indices_to_replace = [[], []]
+        print(*player_1_word_stars)
     else:
         pass
 
@@ -58,13 +65,11 @@ def game():
         try:
             if lives < 1:
                 answer = player_1_word.replace("/", " ")
-                print("All lives lost. Word: ", end='')
-                print(answer)
+                print(f"All lives lost. Word: {answer}")
                 break
             elif "".join(player_1_word_stars) == player_1_word:
                 answer = player_1_word.replace("/", " ")
-                print("You win! Word: ", end='')
-                print(answer)
+                print(f"You win! Word: {answer}")
                 break
 
             player_2_guess = input("Player 2 enter guess ").lower()
